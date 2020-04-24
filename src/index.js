@@ -2,7 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import "bootstrap/dist/css/bootstrap.css"
+import "font-awesome/css/font-awesome.min.css";
 import * as serviceWorker from './serviceWorker';
+
+import Cell from './components/cell'
+import Checkbox from './components/checkBox';
+import Price from './components/price';
+import Table from './components/table';
 
 ReactDOM.render(
   <React.StrictMode>
