@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Cell from "./cell";
 import data from "../data";
 
-
 class Table extends Component {
   constructor(props) {
     super(props);
@@ -102,10 +101,14 @@ class Table extends Component {
 
   handleClick = (event) => {
     event.preventDefault();
-    const POST_REQUEST = this.state.checkedItems.map(function(item){
-        if (item.checked === true){
-            return ({date: item.date, roomCategory: item.room_category, currentPrice: item.price_choosen});
-        }
+    const POST_REQUEST = this.state.checkedItems.map(function (item) {
+      if (item.checked === true) {
+        return {
+          date: item.date,
+          roomCategory: item.room_category,
+          currentPrice: item.price_choosen,
+        };
+      }
     });
     console.log(POST_REQUEST);
   };
@@ -118,7 +121,7 @@ class Table extends Component {
         </table>
         <button
           type="submit"
-          className="btn btn-primary btn-lg pull-right"
+          className="btn btn-primary btn-lg ml-auto"
           onClick={this.handleClick}
         >
           Apply
