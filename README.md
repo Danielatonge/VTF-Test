@@ -21,3 +21,9 @@ Overall Layout
 
 Overall Results
 ![Post request on apply](https://github.com/Danielatonge/VTF-Test/blob/master/postrequest.png)
+
+What was done:
+- [x] General layout using react components
+- [x] Create and import mock data
+- [x] Post request on apply
+- [ ] Recommended price could be adjusted by a person, so it is an input field
