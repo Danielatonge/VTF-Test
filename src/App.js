@@ -1,16 +1,12 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Table from './components/table';
+import React, { Component } from "react";
+import "./App.css";
+import Table from "./components/table";
 
-
-function App() {
-  return (
-    <div className="App">
-      <Table />
-      <button type="submit" className="btn btn-primary btn-sm">Apply</button> 
-    </div>
-  );
+class App extends Component {
+    state = {};
+    render() {
+        return <Table / > ;
+    }
 }
 
 export default App;

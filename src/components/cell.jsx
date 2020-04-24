@@ -4,14 +4,19 @@ import Price from "./price";
 
 class Cell extends Component {
   render() {
+    const { name, isSelected, onCheckboxChange, content } = this.props;
     return (
       <td>
         <div className="row">
           <div className="col-4">
-            <Checkbox />
+            <Checkbox
+              name={name}
+              isSelected={isSelected}
+              onCheckboxChange={onCheckboxChange}
+            />
           </div>
           <div className="col-8">
-            <Price priceTrend= {this.props.content} />
+            <Price priceTrend={content} />
           </div>
         </div>
       </td>
