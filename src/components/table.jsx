@@ -17,17 +17,22 @@ class Table extends Component {
     const name = e.target.name;
     let svar = name;
     let result = svar.split("_");
+    const i = parseInt(result[0]);
+    const j = parseInt(result[1]);
 
     if (!this.getBoolWithName(name)) {
       const newItem = {
         name: name,
         checked: true,
-        date: result[1],
-        room_category: data[parseInt(result[0])].room_category,
-        price_choosen: result[2],
+        date: data[i].info[j].date,
+        room_category: data[i].room_category,
+        price_choosen: data[i].info[j].price_then,
       };
+
       this.setState({ checkedItems: [...this.state.checkedItems, newItem] });
+
     } else {
+
       const index = this.getIndexWithName(name);
       const check = this.state.checkedItems[index].checked;
       const checkedItems = [...this.state.checkedItems];
@@ -35,6 +40,7 @@ class Table extends Component {
       this.setState({ checkedItems: checkedItems });
       console.log(check);
     }
+
   };
 
   getIndexWithName(name) {
@@ -71,9 +77,8 @@ class Table extends Component {
     return (
       <tr key={`row-${rowIndex}`}>
         {data[rowIndex].info.map((cell) => {
-          const date = cell.date;
-          const price_then = cell.price_then;
-          const name = `${rowIndex}_${date}_${price_then}`;
+          const columnId = cell.colId;
+          const name = `${rowIndex}_${columnId}`;
 
           const content = {
             current_price: cell.current_price,
@@ -82,6 +87,7 @@ class Table extends Component {
 
           return (
             <Cell
+              key={name}
               name={name}
               isSelected={this.verifyCheckedWithName(name)}
               onCheckboxChange={this.handleChange}
@@ -95,21 +101,27 @@ class Table extends Component {
 
   renderTableData() {
     return data.map((cell, index) => {
-      return <React.Fragment>{this.renderRow(index)}</React.Fragment>;
+      return (
+        <React.Fragment key={index}>{this.renderRow(index)}</React.Fragment>
+      );
     });
   }
 
   handleClick = (event) => {
     event.preventDefault();
-    const POST_REQUEST = this.state.checkedItems.map(function (item) {
-      if (item.checked === true) {
-        return {
-          date: item.date,
-          roomCategory: item.room_category,
-          currentPrice: item.price_choosen,
-        };
-      }
+
+    let REQUEST = this.state.checkedItems.filter(
+      (item) => item.checked === true
+    );
+
+    const POST_REQUEST = REQUEST.map(item => {
+      return {
+        date: item.date,
+        roomCategory: item.room_category,
+        currentPrice: item.price_choosen
+      };
     });
+
     console.log(POST_REQUEST);
   };
 
